@@ -1,16 +1,20 @@
 # flet-aws-tool
 
-Tool for AWS (Boto3) written in Flet (python)
+Tool for AWS written in Python utilization Flet and Boto3
 
 ## references
-https://flet.dev/
-https://docs.aws.amazon.com/boto3/latest/
+### https://flet.dev/
+### https://docs.aws.amazon.com/boto3/latest/
 
 ## requirements
-Python
-Flet
+###python
+
+flet
+
+boto3
 
 ## recommendations
-Venv
+venv
+
 pipreq
 
