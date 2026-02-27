@@ -1,4 +1,5 @@
 import flet as ft
+import webbrowser
 
 def main(page: ft.Page):
     page.title = "flet aws tool"
@@ -12,8 +13,10 @@ def main(page: ft.Page):
             alignment=ft.MainAxisAlignment.CENTER,
             vertical_alignment=ft.CrossAxisAlignment.START
     )
-
+    
     page.add(top_row)
 
+    webbrowser.open('https://google.com')
+
 if __name__ == "__main__":
-    ft.app(target=main)
+    ft.run(main)
