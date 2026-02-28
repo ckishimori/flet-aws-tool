@@ -13,12 +13,12 @@ async def main(page: ft.Page):
     # Input Fields
     url_input = ft.TextField(
         label="AWS SSO Start URL", 
-        hint_text="https://d-xxxx.awsapps.com",
-        value=""
+        value="https://d-92671513a4.awsapps.com/start/"
     )
+
     region_input = ft.TextField(
         label="AWS Region", 
-        value="us-east-1",
+        value="us-west-2",
         width=200
     )
 
@@ -71,7 +71,7 @@ async def main(page: ft.Page):
             copy_urlpluscode_btn.visible = True
             copy_code_btn.on_click = set_clipboard_code 
             copy_url_btn.on_click = set_clipboard_url
-            copy_url_btnpluscode_btn.on_click = set_clipboard_urlpluscode
+            copy_urlpluscode_btn.on_click = set_clipboard_urlpluscode
             
             page.update()
 
