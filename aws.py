@@ -2,6 +2,11 @@ import boto3
 import time
 from shared import *
 
+oidc_client = None
+access_token = None
+expires_in = None
+interval = None
+
 def set_login_url():
 
     # --- Configuration ---
@@ -48,10 +53,11 @@ def set_login_url():
     aws_devicecodeurl.current.value = device_authorization['verificationUriComplete']
     print(device_authorization['verificationUriComplete'])
 
+async def wait_for_auth():
     # 3. Poll for the access token
     # Keep polling the create_token endpoint until the user authenticates in the browser.
-    start_time = time.time()
-    while time.time() - start_time < expires_in:
+#    start_time = time.time()
+    while True:
         try:
             token_response = oidc_client.create_token(
                 clientId=client_id,
@@ -61,16 +67,18 @@ def set_login_url():
             )
             access_token = token_response['accessToken']
             print("\nSuccessfully authenticated!")
-            break
+            return "Sucess"
         except oidc_client.exceptions.AuthorizationPendingException:
             print("Waiting for authorization...")
             time.sleep(interval)
         except Exception as e:
             print(f"An error occurred during polling: {e}")
-            break
+            return "Error"
     else:
         print("Authentication timed out.")
-        exit()
+        return "Timeout"
+
+def list_accounts():
 
     # 4. Use the access token to get account role credentials
     # Use the sso client to list and then get specific role credentials

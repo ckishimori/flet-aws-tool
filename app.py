@@ -9,6 +9,7 @@ class aws_app(ft.Column):
         self.starturl = ft.TextField(ref=aws_starturl, label="Start URL", hint_text="Start URL", width=400)
         self.region = ft.TextField(ref=aws_region, label="Region", hint_text="Region", width=200)
         self.devicecodeurl = ft.TextField(ref=aws_devicecodeurl, label="Device Code URL", hint_text="Device Code URL", width=400)
+        self.authenticated = ft.TextField(ref=aws_authenticated, label="Authenticaed", hint_text="Authenticated", width=200)
         self.controls = [
             self.starturl,
             self.region,
@@ -16,8 +17,9 @@ class aws_app(ft.Column):
             self.devicecodeurl
         ]
 
-    def get_login_url_clicked(e):
+    async def get_login_url_clicked(e):
         set_login_url()
+        self.authenticated.value = await wait_for_auth()
    
 def main(page: ft.Page):
     page.title = "flet aws tool"
