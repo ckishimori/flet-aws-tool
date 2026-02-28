@@ -30,6 +30,7 @@ async def main(page: ft.Page):
     # Buttons
     copy_code_btn = ft.ElevatedButton("Copy Code", icon=ft.Icons.COPY, visible=False)
     copy_url_btn = ft.ElevatedButton("Copy URL", icon=ft.Icons.LINK, visible=False)
+    copy_urlpluscode_btn = ft.ElevatedButton("Copy URL+Code", icon=ft.Icons.LINK, visible=False)
 
     async def start_login_flow(e):
         if not url_input.value or not region_input.value:
@@ -62,10 +63,15 @@ async def main(page: ft.Page):
             async def set_clipboard_url():
                 await ft.Clipboard().set(value=auth_data['verificationUri'])
 
+            async def set_clipboard_urlpluscode():
+                await ft.Clipboard().set(value=auth_data['verificationUriComplete'])
+
             copy_code_btn.visible = True
             copy_url_btn.visible = True
+            copy_urlpluscode_btn.visible = True
             copy_code_btn.on_click = set_clipboard_code 
             copy_url_btn.on_click = set_clipboard_url
+            copy_url_btnpluscode_btn.on_click = set_clipboard_urlpluscode
             
             page.update()
 
@@ -100,7 +106,7 @@ async def main(page: ft.Page):
             ft.Container(
                 content=ft.Column([
                     code_display,
-                    ft.Row([copy_code_btn, copy_url_btn], alignment="center")
+                    ft.Row([copy_code_btn, copy_url_btn,copy_urlpluscode_btn], alignment="center")
                 ], horizontal_alignment="center"),
                 padding=20,
                 bgcolor=ft.Colors.GREY_100,
